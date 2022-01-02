@@ -8,4 +8,5 @@
 ## Please fill in your project documentation in this README.md file 
 
 
-Refer to [README](docs/source/index.rst) for this sample project documentation. 
+# ALU FOR RADIATION HARDENED APPLICATIONS
+This repo contains the design of a radiation hardened TMR based ALY implemented in SKY130 open source PDK. This design was hardened using openlane

@@ -39,14 +39,14 @@ set ::env(VERILOG_FILES) "\
 
 ## Clock configurations
 set ::env(CLOCK_PORT) "user_clock2"
-set ::env(CLOCK_NET) "mprj.clk"
+set ::env(CLOCK_NET) "TMR_ALU.CLK"
 
-set ::env(CLOCK_PERIOD) "10"
+set ::env(CLOCK_PERIOD) "40"
 
 ## Internal Macros
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
-	mprj vccd1 vssd1"
+	TMR_ALU vccd1 vssd1"
 
 ### Macro Placement
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
@@ -54,16 +54,34 @@ set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
 ### Black-box verilog and views
 set ::env(VERILOG_FILES_BLACKBOX) "\
 	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
-	$script_dir/../../verilog/rtl/user_proj_example.v"
+	$script_dir/../../verilog/rtl/user_proj_example.v \
+	"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/user_proj_example.lef"
+	$script_dir/../../lef/user_proj_example.lef\
+	$script_dir/../../lef/to_ALU_opt_TMR_KP_Voter.lef
+	"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/user_proj_example.gds"
+	$script_dir/../../gds/user_proj_example.gds\
+	$script_dir/../../gds/to_ALU_opt_TMR_KP_Voter.gds
+	"
 
-set ::env(GLB_RT_MAXLAYER) 5
+#set ::env(GLB_RT_MAXLAYER) 6
 
+set ::env(ROUTING_CORES) 6
+
+#Vertical Stripes Offset
+set ::env(FP_PDN_VOFFSET) 0
+
+#Vertical Stripes Offset
+set ::env(FP_PDN_HOFFSET) 0
+
+#Vertical PDN stripes pitch
+set ::env(FP_PDN_VPITCH) 300 
+
+#Horizontal PDN stripes pitch
+set ::env(FP_PDN_HPITCH) 300 
 # disable pdn check nodes becuase it hangs with multiple power domains.
 # any issue with pdn connections will be flagged with LVS so it is not a critical check.
 set ::env(FP_PDN_CHECK_NODES) 0
